@@ -29,19 +29,23 @@ function Set:Contains(value)
     return not not self.index[value]
 end
 
+function Set:IndexOf(value)
+    return self.index[value]
+end
+
 function Set:Add(value)
     -- Guard
-    if self:Contains(value) then return end
+    if self:IndexOf(value) then return end
 
     -- Add
     self:_add(value)
 end
 
 function Set:Remove(value)
-    if not self:Contains(value) then return end
+    --Locate
+    local index = self:IndexOf(value)
+    if index then return end
 
-    -- Locate
-    local index = self.index[value]
     local last = self.values[self.size]
 
     -- Swap Array

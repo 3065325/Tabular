@@ -1,9 +1,22 @@
 local Queue = {}
 Queue.__index = Queue
 
+function Queue.new()
+  local self = setmetatable({}, Queue)
+  
+  --Pointers
+  self.tail = 0
+  self.head = 1
+  
+  --Data
+  self.size = 0
+
+  return self
+end
+
 function Queue:PushBack(value)
     -- Add to tail
-    self.values[self.tail] = value
+    self[self.tail] = value
 
     -- Increment tail
     self.tail -= 1
@@ -14,7 +27,7 @@ end
 
 function Queue:PushFront(value)
     -- Add to head
-    self.values[self.head] = value
+    self[self.head] = value
 
     -- Increment head
     self.head += 1
@@ -46,15 +59,15 @@ function Queue:PopFront()
     -- Decrement size
     self.size -= 1
 
-    return self.values[self.head]
+    return self[self.head]
 end
 
 function Queue:Front()
-    return self.values[self.head - 1]
+    return self[self.head - 1]
 end
 
 function Queue:Back()
-    return self.values[self.tail + 1]
+    return self[self.tail + 1]
 end
 
 function Queue:Size()

@@ -116,6 +116,10 @@ function BinaryHeap:Contains(value)
     return not not self.lookup[value]
 end
 
+function BinaryHeap:IndexOf(value)
+    return self.lookup[value]
+end
+
 function BinaryHeap:Print()
     for i = 1, self.size do
         local indent = string.rep(" ", math.floor(math.log(i, 2)) * 4)

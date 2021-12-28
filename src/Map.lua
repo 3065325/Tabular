@@ -33,11 +33,15 @@ function Map:Contains(key)
     return not not self.index[key]
 end
 
+function Map:IndexOf(key)
+    return self.index[key]
+end
+
 function Map:Set(key, value)
-    if not self:Contains(key) then
+    local index = self:IndexOf(key)
+    if not index then
         self:_add(key, value)
     else
-        local index = self.index[key]
         self.values[index] = value
     end
 end
@@ -47,10 +51,10 @@ function Map:Get(key)
 end
 
 function Map:Remove(key)
-    if not self:Contains(key) then return end
-
     -- Locate
-    local index = self.index[key]
+    local index = self:IndexOf(key)
+    if not index then return end
+
     local last = self.values[self.size]
 
     -- Swap Array
